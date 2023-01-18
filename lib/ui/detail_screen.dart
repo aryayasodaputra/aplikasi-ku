@@ -1,10 +1,10 @@
-import 'package:flutter/cupertino.dart';
+import 'package:aplikasi_ku/data/model/my_item.dart';
 import 'package:flutter/material.dart';
 
 class DetailScreen extends StatelessWidget {
-  const DetailScreen({Key? key, required this.title}) : super(key: key);
+  const DetailScreen({Key? key, required this.item}) : super(key: key);
 
-  final String title;
+  final MyItem item;
   
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,8 @@ class DetailScreen extends StatelessWidget {
         title: const Text('Detail Screen'),
       ),
       body: Center(
-        child: Text(title)),
+        child: Text("${item.title} ${item.id}"),
+        ),
     );
   }
 }

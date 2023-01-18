@@ -1,5 +1,5 @@
+import 'package:aplikasi_ku/data/model/my_item.dart';
 import 'package:aplikasi_ku/ui/detail_screen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class MainScreen extends StatefulWidget {
@@ -18,7 +18,7 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
       backgroundColor: Colors.blue,
       appBar: AppBar(
-        title: const Center(child: Text("Aplikasi Ku")),
+        title: const Center(child: Text("Aplikasi Ku, 2015051090")),
         actions: [
           IconButton(
             onPressed: () {
@@ -35,25 +35,25 @@ class _MainScreenState extends State<MainScreen> {
         itemBuilder: (context, index) {
           final item  = list[index];
           return Dismissible(
-            key: UniqueKey(), 
+            key: Key(item.id.toString()), 
             onDismissed: (_){
               list.removeAt(index);
         },
           child: Card(
             child: ListTile(
               leading: const CircleAvatar(
-              child: FlutterLogo(),
               radius: 24,
+              child: FlutterLogo(),
             ),
-            title: Text("${list[index]} ${index + 1}"),
+            title: Text("${item.title} ${item.id}"),
             subtitle: const Text('This is subtitle'),
             trailing: IconButton(
-              icon: Icon(Icons.chevron_right),
+              icon: const Icon(Icons.chevron_right),
               onPressed: () {
-                Navigator.push(context, 
-                  MaterialPageRoute(builder: (_) => DetailScreen(item: list[index])));
-              },
-            ),
+                Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => DetailScreen(item: item)));
+                },
+              ),
             ),
           ),
         );
@@ -61,18 +61,19 @@ class _MainScreenState extends State<MainScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           setState(() {
-            list.add(MyItem(id: lastId, title: "Aplikasi Ku"));
+            list.add(MyItem(id: lastId, title: "I Gede Arya Yasoda Putra"));
             lastId++;
           });
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
-      bottomNavigationBar: BottomNavigationBar(items: const [
+      bottomNavigationBar: BottomNavigationBar(
+        items: const [
         BottomNavigationBarItem(icon: Icon(Icons.home_filled), label: 'Home'),
-        BottomNavigationBarItem(
-            icon: Icon(Icons.people_alt_sharp), label: 'Customers'),
+        BottomNavigationBarItem(icon: Icon(Icons.people_alt_sharp), label: 'Customers'),
         BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Favorite'),
-      ]),
+        ],
+      ),
     );
   }
 }
